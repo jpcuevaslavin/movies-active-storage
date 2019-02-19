@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @movie.title %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @movie.year %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  
+  <% if @movie.images.attached? %>
+    <% @movie.images.each do |image| %>
+      <%= image_tag image.variant(resize: "100x100", flip: true, negate: true) %>
+      <%= link_to 'x', delete_image_movie_path(@movie.id, image.id), method: :delete %>
+    <% end %>
+  <% else %>
+    No posee imagen
+  <% end %>
+
+</p>
+
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back', movies_path %>
